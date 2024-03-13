@@ -1,0 +1,22 @@
+GET http://localhost:9000/api/v1/tasks/
+
+###
+POST http://localhost:9000/api/v1/tasks
+Content-Type: application/json
+
+{
+    "title": "Title example",
+    "description": "Description example"
+}
+
+###
+PATCH http://localhost:9000/api/v1/tasks/65f20959b8565cf9934206a4
+Content-Type: application/json
+
+{
+    "title": "Title Edit",
+    "description": "Description Edit"
+}
+
+###
+DELETE http://localhost:9000/api/v1/tasks/65f20959b8565cf9934206a4
