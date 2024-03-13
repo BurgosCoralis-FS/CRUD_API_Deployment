@@ -1,22 +1,28 @@
-GET http://localhost:9000/api/v1/tasks/
+GET http://localhost:9000/api/v1/movies/
+
 
 ###
-POST http://localhost:9000/api/v1/tasks
+GET http://localhost:9000/api/v1/movies/65f231289f2196e5c3483071
+
+###
+POST http://localhost:9000/api/v1/movies
 Content-Type: application/json
 
 {
     "title": "Title example",
-    "description": "Description example"
+    "description": "Description example",
+    "completed": false
 }
 
 ###
-PATCH http://localhost:9000/api/v1/tasks/65f20959b8565cf9934206a4
+PATCH http://localhost:9000/api/v1/movies/65f231289f2196e5c3483071
 Content-Type: application/json
 
 {
     "title": "Title Edit",
-    "description": "Description Edit"
+    "description": "Description Edit",
+    "completed": true
 }
 
 ###
-DELETE http://localhost:9000/api/v1/tasks/65f20959b8565cf9934206a4
+DELETE http://localhost:9000/api/v1/movies/65f231289f2196e5c3483071
