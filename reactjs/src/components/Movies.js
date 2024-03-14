@@ -13,9 +13,8 @@ function Movies() {
     })
 
     const API_BASE = process.env.NODE_ENV === 'development'
-	? `http://localhost:9000/api/v1`
-	: process.env.REACT_APP_BASE_URL;
-
+    ? `http://localhost:9000/api/v1`
+    : process.env.REACT_APP_BASE_URL;
     let ignore = false
     useEffect(() => {
         if (!ignore){

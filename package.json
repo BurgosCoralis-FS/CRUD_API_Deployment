@@ -2,21 +2,21 @@
     "name": "apiWithClient",
     "version": "1.0.0",
     "engines": {
-        "node": "21.6.2"
+    "node": "21.6.2"
     },
     "main": "index.js",
     "description": "",
     "scripts": {
-        "install-frontend": "npm install --prefix frontend",
-        "install-backend": "npm install --prefix backend",
-        "build-frontend": "npm run build --prefix frontend",
+        "install-reactjs": "npm install --prefix reactjs",
+        "install-api": "npm install --prefix api",
+        "build-reactjs": "npm run build --prefix reactjs",
         "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
-        "start": "npm start --prefix backend",
-        "dev:react": "concurrently --raw \"npm run backend\" \"npm run react\"",
-        "react": "cd frontend && npm run start",
-        "api": "cd backend; nodemon server.js"
+        "start": "npm start --prefix api",
+        "dev:react": "concurrently --raw \"npm run api\" \"npm run react\"",
+        "react": "cd reactjs && npm run start",
+        "api": "cd api; nodemon server.js"
     },
     "dependencies": {
         "concurrently": "^8.2.2"
     }
-}
+}  

@@ -1,5 +1,5 @@
 const express = require('express')
-require('dotenv').config()
+require("dotenv").config()
 const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors')
@@ -7,7 +7,7 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 9000;
 
 const movieRouter = require('./routes/movieRoutes')
 
@@ -21,10 +21,13 @@ db.once('open', () => console.log('Database Connection Established'))
 app.use(express.json())
 app.use('/api/v1/movies', movieRouter)
 
-app.use(express.static(path.join(__dirname, '../frontend/build')))
+// look in the react build folder
+app.use(express.static(path.join(__dirname, '../reactjs/build')))
 
+// for any routes not defined by the api, assume it's a direct request
+// to a client-side route
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
+    res.sendFile(path.join(__dirname, '../reactjs/build', "index.html"))
 })
 
 app.listen(PORT, () => {
