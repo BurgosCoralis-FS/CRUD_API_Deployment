@@ -12,7 +12,7 @@
         "build-frontend": "npm run build --prefix frontend",
         "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
         "start": "npm start --prefix backend",
-        "dev:react": "concurrently --raw \"npm run backend\" \"npm run frontend\"",
+        "dev:react": "concurrently --raw \"npm run backend\" \"npm run react\"",
         "react": "cd frontend && npm run start",
         "api": "cd backend; nodemon server.js"
     },
