@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Dashboard from './pages/Dashboard';
 
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import Movie from './pages/Movie'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path='/' exact element={<Home />} />
         <Route path='/dashboard' exact element={<Dashboard />} />
+        <Route path='/movies/:id' exact element={<Movie />} />
       </Routes>
     </Router>
   );
