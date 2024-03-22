@@ -103,9 +103,10 @@ function Movie() {
         ? e.target.checked 
         : e.target.value
 
+
         setValues((values) => ({
             ...values,
-            [e.target.title]: value
+            [e.target.name]: value,
         }))
     }
 
