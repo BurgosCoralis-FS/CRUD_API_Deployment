@@ -66,13 +66,12 @@ router.patch('/:id', getMovie, async (req, res) => {
     }
 })
 
-router.delete("/:id", getMovie, async (req, res) => {
-    // res.send("test")
+router.delete('/:id', getMovie, async(req, res) => {
     try {
-        const { id } = req.params.id
-        await Movie.deleteOne(id)
-        res.json({ message: "Movie removed "})
-    } catch(error) {
+        const id = req.params.id
+        await Movie.deleteOne({ _id: id })
+        res.json({message: "Removed movie"})
+    } catch(error){
         res.status(500).json({ message: error.message })
     }
 })

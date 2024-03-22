@@ -105,7 +105,7 @@ function Movie() {
 
         setValues((values) => ({
             ...values,
-            [e.target.name]: value
+            [e.target.title]: value
         }))
     }
 
