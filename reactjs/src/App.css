@@ -123,19 +123,3 @@ li a{
 li a:hover {
   color:rgb(120, 121, 122)
 }
-
-.completed {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.check-box {
-  height: 15px;
-  width: 15px;
-  background-color: #eee;
-}
-
-.check-box:checked {
-  background-color: #2196F3;
-}

@@ -12,7 +12,7 @@ function Movie() {
     const [values, setValues] = useState({
         title: '',
         description: '',
-        completed: false
+        rating: 1
     })
 
     const { id } = useParams()
@@ -44,7 +44,7 @@ function Movie() {
                         setValues({
                             title: data.title,
                             description: data.description,
-                            completed: data.completed
+                            rating: data.rating
                         })
                     })
         } catch(error) {
@@ -92,21 +92,16 @@ function Movie() {
 	}
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
-		updateMovie();
+		e.preventDefault()
+		updateMovie()
 	}
 
 	const handleInputChanges = (e) => {
         e.persist()
 
-        const value = e.target.type === 'checkbox' 
-        ? e.target.checked 
-        : e.target.value
-
-
         setValues((values) => ({
             ...values,
-            [e.target.name]: value,
+            [e.target.name]: e.target.value
         }))
     }
 
@@ -135,14 +130,14 @@ function Movie() {
                         className="text-box "/>
                     </label>
 
-                    <label className="completed">
-                        Completed
+                    <label>
+                        Rating:
                         <input 
-                        type={"checkbox"}
-                        name='completed'
-                        checked={values.completed}
-                        onChange={handleInputChanges}
-                        className='check-box' />
+                        type={"number"} 
+                        name='rating' 
+                        value={values.rating} 
+                        onChange={handleInputChanges} 
+                        className="text-box "/>
                     </label>
 
                     <input type={"submit"} value='Submit' className="submit-button"/>
@@ -151,24 +146,15 @@ function Movie() {
                 <div className="movie-output-container">
                     <h1>{values && values.title}</h1>
                     <h2>{values && values.description}</h2>
-                    <label className="completed">
-                        <h3 style={styles.text}>Completed</h3>
-                        <input 
-                    type={"checkbox"}
-                    name='completed'
-                    checked={values && values.completed}
-                    onChange={handleInputChanges}
-                    className='check-box' />
-                    </label>
+                    <h3 style={styles.text}>Rating: {values && values.rating}</h3>
                     <button onClick={() => deleteMovie()} className='submit-button'>Delete Movie</button>
                 </div>
-
             </div>
         </div>
-    );
+    )
 }
 
-export default Movie;
+export default Movie
 
 const styles = {
     text: {

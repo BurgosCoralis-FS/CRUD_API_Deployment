@@ -9,10 +9,11 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    completed: {
-        type: Boolean,
-        required: true,
-        default: false
+    rating: {
+        type: Number,
+        min: 1,
+        max: 10,
+        default: 1
     },
     created_at: {
         type: Date,
