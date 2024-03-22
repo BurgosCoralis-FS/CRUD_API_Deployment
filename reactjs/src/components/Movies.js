@@ -9,7 +9,7 @@ function Movies() {
     const [values, setValues] = useState({
         title: '',
         description: '',
-        completed: false 
+        rating: 1 
     })
 
     const API_BASE = process.env.NODE_ENV === 'development'
@@ -66,24 +66,10 @@ function Movies() {
     const handleInputChanges = (e) => {
         e.persist()
 
-        const value = e.target.type === 'checkbox' 
-        ? e.target.checked 
-        : e.target.value
-
         setValues((values) => ({
             ...values,
-            [e.target.name]: value
+            [e.target.name]: e.target.value
         }))
-    }
-
-    const handleCheckboxChange = (e, movieId) => {
-        e.persist()
-        const value = e.target.checked
-        setMovies((prevMovies) =>
-            prevMovies.map((movie) =>
-                movie._id === movieId ? { ...movie, [e.target.name]: value } : movie
-            )
-        )
     }
 
     return (
@@ -110,14 +96,14 @@ function Movies() {
                     className="text-box "/>
                 </label>
 
-                <label className="completed">
-                    Completed
+                <label>
+                    Rating:
                     <input 
-                    type={"checkbox"}
-                    name='completed'
-                    checked={values.completed}
+                    type={"number"}
+                    name='rating'
+                    checked={values.rating}
                     onChange={handleInputChanges}
-                    className='check-box' />
+                    className='text-box' />
                 </label>
 
                 <input type={"submit"} value='Submit' className="submit-button"/>
@@ -130,12 +116,6 @@ function Movies() {
                 movies?.map(movie => (
                 <li key={movie._id}>
                     <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
-                    <input 
-                    type={'checkbox'} 
-                    name='completed' 
-                    checked={movie.completed} 
-                    onChange={(e) => handleCheckboxChange(e, movie._id)}
-                    className='check-box'/>
                 </li>
                 ))
             }

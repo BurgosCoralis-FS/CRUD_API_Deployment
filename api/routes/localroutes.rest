@@ -11,7 +11,7 @@ Content-Type: application/json
 {
     "title": "Title example",
     "description": "Description example",
-    "completed": false
+    "rating": 2
 }
 
 ###
@@ -21,7 +21,7 @@ Content-Type: application/json
 {
     "title": "Title Edit",
     "description": "Description Edit",
-    "completed": true
+    "rating": 5
 }
 
 ###
