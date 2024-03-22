@@ -14,7 +14,8 @@
         "start": "npm start --prefix api",
         "dev:react": "concurrently --raw \"npm run api\" \"npm run react\"",
         "react": "cd reactjs && npm run start",
-        "api": "cd api; nodemon server.js"
+        "api": "cd api; nodemon server.js",
+        "ios": "cd AmobileList && npm run ios"
     },
     "dependencies": {
         "concurrently": "^8.2.2"
