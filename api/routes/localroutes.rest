@@ -25,4 +25,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:9000/api/v1/movies/65f231289f2196e5c3483071
+DELETE http://localhost:9000/api/v1/movies/65fce9e8370b3a0b2d814bcb
