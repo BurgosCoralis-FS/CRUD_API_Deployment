@@ -13,7 +13,7 @@
         "build-reactjs": "npm run build --prefix reactjs",
         "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\";",
         "start": "npm start --prefix api",
-        "dev:react": "concurrently --raw \"npm run api\" \"npm run react\"",
+        "dev:react": "concurrently --raw \"npm run api\" \"npm run react\" \"npm run ios\"",
         "react": "cd reactjs && npm run start",
         "api": "cd api; nodemon server.js",
         "ios": "cd AmobileList && npm run ios"
