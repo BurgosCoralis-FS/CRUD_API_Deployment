@@ -2,6 +2,30 @@ body {
   background-color: rgb(55 65 81);
 }
 
+h1 {
+  margin: 0
+}
+
+.signIn form{
+  padding: 40px 10px;
+}
+
+.signIn form input{
+  margin-top: 2%;
+}
+
+.signIn form button{
+  margin-top: 2%;
+}
+
+.signIn span+button {
+  background: transparent;
+  color: yellow;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .Container {
   display: flex;
   flex-direction: column;

@@ -4,6 +4,8 @@ import { useFocusEffect } from '@react-navigation/native'
 
 import Header from '../components/Header'
 import ListContainer from '../components/ListContainer'
+import authService from "../services/auth.service"
+import movieService from "../services/movie.service"
 
 import styles from "../Appstyles"
 
@@ -11,36 +13,47 @@ export default function Home({ navigation }) {
     const [movies, setMovies] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-
+    const [currentUser, setCurrentUser] = useState(null)
 
     useFocusEffect(
         useCallback(() => {
-            let ignore = false
-
-            if(!ignore) {
-                getMovies()
+            async function getUser(){
+                try {
+                    const user = await authService.getCurrentUser()
+                    if (user){
+                        setCurrentUser(user)
+                        privateContent()
+                    }
+                } catch (err) {
+                    console.error("Error fetching user", err)
+                }
             }
-
-            return () => {
-                ignore = true
-            }
-        }, [])
+            getUser()
+        }
+        , [])
     )
 
-    const getMovies = async () => {
+    const privateContent = () => {
         setLoading(true)
-        try {
-            await fetch(`https://movie-app-deplyoment-5c3c54d11d03.herokuapp.com/api/v1/movies`)
-                    .then(res => res.json())
-                    .then(data => {
-                        // console.log({data})
-                        setMovies(data)
-                    })
-        } catch(error){
-            setError(error.message || 'Unexpected Error')
-        } finally {
-            setLoading(false)
-        }
+        movieService.getAllPrivateMovies().then(
+            response => {
+                // console.log('movies', response.data)
+                setMovies(response.data)
+            }
+        )
+        .catch(err => {
+            console.error('Secure page error', err)
+            if(err.response && err.response.status === 403){
+                authService.logout()
+                navigation.navigate('SignIn')
+            }
+        })
+        .finally(() => setLoading(false))
+    }
+
+    const handleLogOut = () => {
+        authService.logout()
+        navigation.navigate('SignIn')
     }
 
     return (
@@ -62,6 +75,13 @@ export default function Home({ navigation }) {
                 <Button 
                 title="Add a movie" 
                 onPress={() => navigation.navigate('Create')}
+                color='black' />
+            </View>
+
+            <View style={styles.button}>
+                <Button 
+                title="Log Out" 
+                onPress={handleLogOut}
                 color='black' />
             </View>
         </SafeAreaView>

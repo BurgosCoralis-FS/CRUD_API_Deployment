@@ -64,7 +64,7 @@ export default function Create({ navigation }) {
 
             <View>
                 <TextInput
-                value={values.rating}
+                value={values.rating ? values.rating.toString() : ''}
                 onChangeText={(number) => handleInputChanges('rating', number)}
                 placeholder='Rating'
                 keyboardType="numeric"

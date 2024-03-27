@@ -1,4 +1,8 @@
 const express = require('express')
+const passport = require('passport')
+
+const passportService = require('../services/passport')
+const protectedRoute = passport.authenticate('jwt', { session: false })
 const router = express.Router()
 
 const Movie = require('../models/Movies')
@@ -17,7 +21,7 @@ const getMovie = async (req, res, next) => {
     next()
 }
 
-router.get('/', async (req, res) => {
+router.get('/', protectedRoute, async (req, res) => {
     try {
         // res.send("test")
         const movies = await Movie.find()

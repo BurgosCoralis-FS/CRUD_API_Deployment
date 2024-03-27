@@ -6,6 +6,7 @@ import * as Network from 'expo-network'
 import Home from './pages/Home'
 import Movie from './pages/Movie'
 import Create from './pages/Create'
+import SignIn from './pages/SignIn'
 
 const Stack = createNativeStackNavigator()
 
@@ -18,7 +19,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={Home} options={{title: 'Home'}} />
+        <Stack.Screen name='SignIn' component={SignIn} options={{ title: 'Sign In' }}/>
+        <Stack.Screen name='Home' component={Home} options={{
+          title: 'Home',
+          headerBackVisible: false 
+        }} />
         <Stack.Screen name='Movie' component={Movie} />
         <Stack.Screen name='Create' component={Create} />
       </Stack.Navigator>
