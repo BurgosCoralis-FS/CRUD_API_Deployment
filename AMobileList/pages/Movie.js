@@ -35,7 +35,7 @@ export default function Movie({ route, navigation }) {
                 await fetch(`https://movie-app-deplyoment-5c3c54d11d03.herokuapp.com/api/v1/movies/${id}`)
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data)
+                            // console.log(data)
                             setValues({
                                 title: data.title,
                                 description: data.description,

@@ -18,7 +18,7 @@ function Header() {
             <p className='title'>Movie Tracker App</p>
             <Link to="/">Home</Link>
             <Link to="/dashboard">Dashboard</Link>
-            <button className='title' onClick={handleLogOut}>Log Out</button>
+            <button onClick={handleLogOut}>Log Out</button>
         </header>
         </div>
     );
