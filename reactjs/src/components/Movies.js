@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import '../App.css';
+import React, { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
+import authService from "../services/auth.service"
+import movieService from '../services/movies.service'
+
+import '../App.css'
 
 function Movies() {
     const [movies, setMovies] = useState(null)
@@ -12,35 +16,57 @@ function Movies() {
         rating: 1 
     })
 
+    const navigate = useNavigate()
+
     const API_BASE = process.env.NODE_ENV === 'development'
     ? `http://localhost:9000/api/v1`
-    : process.env.REACT_APP_BASE_URL;
+    : process.env.REACT_APP_BASE_URL
+
+
+    const privateContent = () => {
+        movieService.getAllPrivateMovies().then(
+            response => {
+                // console.log('res data', response.data)
+                setMovies(response.data)
+            },
+            (error) => {
+                console.log('Secured Page Error', error.response)
+                if(error.response && error.response.status === 401){
+                    authService.logout()
+                    navigate('/login')
+                }
+            }
+        )
+    }
+
     let ignore = false
     useEffect(() => {
-        if (!ignore){
-            getMovies()
-        }
+        privateContent()
+        
+        // if (!ignore){
+        //     getMovies()
+        // }
 
-        return () => {
-            ignore = true
-        }
+        // return () => {
+        //     ignore = true
+        // }
     }, [])
 
-    const getMovies = async () => {
-        setLoading(true)
-        try {
-            await fetch(`${API_BASE}/movies`)
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        setMovies(data)
-                    })
-        } catch(error){
-            setError(error.message || 'Unexpected Error')
-        } finally {
-            setLoading(false)
-        }
-    }
+    // const getMovies = async () => {
+    //     setLoading(true)
+    //     try {
+    //         await fetch(`${API_BASE}/movies`)
+    //                 .then(res => res.json())
+    //                 .then(data => {
+    //                     console.log(data)
+    //                     setMovies(data)
+    //                 })
+    //     } catch(error){
+    //         setError(error.message || 'Unexpected Error')
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // }
 
     const addMovie = async () => {
         try {
@@ -50,7 +76,7 @@ function Movies() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(values)
-            }).then(() => getMovies())
+            }).then(() => privateContent())
         } catch(error) {
                 setError(error.message || "Unexpected Error")
         } finally {
@@ -74,12 +100,12 @@ function Movies() {
 
     return (
         <div className="container">
-        <div className="form-container">
-            <form on onSubmit={(e) => handleSubmit(e)}>
+        <div>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <label>
                     Title:
                     <input 
-                    type={"text"} 
+                    type='text' 
                     name='title' 
                     value={values.title} 
                     onChange={handleInputChanges} 
@@ -89,7 +115,7 @@ function Movies() {
                 <label>
                     Description:
                     <input 
-                    type={"text"} 
+                    type='text' 
                     name='description' 
                     value={values.description} 
                     onChange={handleInputChanges} 
@@ -99,14 +125,14 @@ function Movies() {
                 <label>
                     Rating:
                     <input 
-                    type={"number"}
+                    type='number'
                     name='rating'
-                    checked={values.rating}
+                    value={values.rating}
                     onChange={handleInputChanges}
                     className='text-box' />
                 </label>
 
-                <input type={"submit"} value='Submit' className="submit-button"/>
+                <input type='submit' value='Submit' className="submit-button"/>
             </form>
         </div>
 
